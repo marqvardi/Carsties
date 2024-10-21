@@ -48,7 +48,7 @@ public class AuctionController : ControllerBase
         return _mapper.Map<AuctionDto>(auction);
     }
 
-    [Authorize]
+    // [Authorize]
     [HttpPost]
     public async Task<ActionResult<AuctionDto>> CreateAuction(CreateAuctionDto createAuctionDto)
     {
@@ -69,7 +69,7 @@ public class AuctionController : ControllerBase
         return CreatedAtAction(nameof(GetAuctionById), new { auction.Id }, newAuction);
     }
 
-    [Authorize]
+    // [Authorize]
     [HttpPut("{id}")]
     public async Task<ActionResult> UpdateAuction(Guid id, UpdateAuctionDto updateAuctionDto)
     {
@@ -94,7 +94,7 @@ public class AuctionController : ControllerBase
         return BadRequest("Could not save changes to db");
     }
 
-    [Authorize]
+    // [Authorize]
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteAuction(Guid id)
     {

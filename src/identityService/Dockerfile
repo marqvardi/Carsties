@@ -1,0 +1,26 @@
+    FROM mcr.microsoft.com/dotnet/sdk:7.0 as build
+    WORKDIR /app
+    RUN mkdir -p /app
+    EXPOSE 80
+
+    COPY Carsties.sln Carsties.sln
+    COPY src/AuctionService/AuctionService.csproj src/AuctionService/AuctionService.csproj
+    COPY src/SearchService/SearchService.csproj src/SearchService/SearchService.csproj
+    COPY src/GatewayService/GatewayService.csproj src/GatewayService/GatewayService.csproj
+    COPY src/Contracts/Contracts.csproj src/Contracts/Contracts.csproj
+    COPY src/identityService/identityService.csproj src/identityService/identityService.csproj
+
+    # Restore package deps
+    RUN dotnet restore Carsties.sln
+
+    # Copy the app folders over
+    COPY src/identityService src/identityService
+    WORKDIR /app/src/identityService
+    RUN dotnet publish -c Release -o /app/src/out
+
+
+    # Build runtime image
+    FROM mcr.microsoft.com/dotnet/aspnet:7.0
+    WORKDIR /app 
+    COPY --from=build /app/src/out .
+    ENTRYPOINT [ "dotnet", "identityService.dll" ]
