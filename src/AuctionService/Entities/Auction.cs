@@ -1,4 +1,4 @@
-﻿ namespace AuctionService.Entities;
+﻿namespace AuctionService.Entities;
 
 public class Auction
 {
@@ -11,7 +11,8 @@ public class Auction
     public DateTime CreatedAT { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     public DateTime AuctionEnd { get; set; } = DateTime.UtcNow;
-    public  Status Status { get; set; }
-    public  Item Item { get; set; }
+    public Status Status { get; set; }
+    public Item Item { get; set; }
 
+    public bool HasReservedPrice() => ReservePrice > 0;
 }

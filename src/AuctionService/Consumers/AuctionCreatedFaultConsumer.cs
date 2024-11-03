@@ -18,7 +18,7 @@ public class AuctionCreatedFaultConsumer : IConsumer<Fault<AuctionCreated>>
         }
         else
         {
-            System.Console.WriteLine("not an argmument exception, update error dashoard somewhere");
+            System.Console.WriteLine("not an argument exception, update error dashboard somewhere");
         }
     }
 }
