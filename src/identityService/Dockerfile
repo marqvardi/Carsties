@@ -1,4 +1,4 @@
-    FROM mcr.microsoft.com/dotnet/sdk:7.0 as build
+    FROM mcr.microsoft.com/dotnet/sdk:8.0 as build
     WORKDIR /app
     RUN mkdir -p /app
     EXPOSE 80
@@ -9,6 +9,8 @@
     COPY src/GatewayService/GatewayService.csproj src/GatewayService/GatewayService.csproj
     COPY src/Contracts/Contracts.csproj src/Contracts/Contracts.csproj
     COPY src/identityService/identityService.csproj src/identityService/identityService.csproj
+    COPY tests/AuctionService.UnitTests/AuctionService.UnitTests.csproj tests/AuctionService.UnitTests/
+
 
     # Restore package deps
     RUN dotnet restore Carsties.sln
